@@ -1,0 +1,36 @@
+<footer>
+    <div class="wrapper-contents footer flex-between-center wrap gap-1">
+        <div>
+            <a href="/" class="logo" title="Back to Home">JRhythm</a>
+        </div>
+        <p>
+            &copy;<span id="copyright"></span> | Built with Astro | All rights
+            reserved | Made by : Miko
+        </p>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: var(--blue-950);
+        color: var(--light-base);
+    }
+
+    .footer {
+        padding-block: 1em;
+        border-top: var(--border);
+    }
+
+    .footer p {
+        opacity: 1;
+    }
+
+    /* 700px  */
+    @media (max-width: 43.75em) {
+        .footer {
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+    }
+</style>

@@ -1,0 +1,54 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import BlogPostCard from "../components/BlogPostCard.astro";
+// import "../styles/blog.css";
+const allPosts = Object.values(
+	import.meta.glob("./posts/*.md", { eager: true }),
+);
+---
+
+<MainLayout title="Homepage Rhythm Nation">
+	<section aria-labelledby="titleHome">
+		<div class="wrapper-contents home">
+			<h1 id="titleHome">James Rhythm Nation</h1>
+			<p class="h4">
+				Join the Community and learn from Music Producers and
+				Enthusiasts
+			</p>
+		</div>
+	</section>
+	<section aria-labelledby="postsResent">
+		<div class="wrapper-contents posts__resent">
+			<h2 id="postsResent">Resent Blog Posts</h2>
+			<ul class="posts__list posts__list-home">
+				{
+					allPosts
+						.slice(0, 3)
+						.map((post: any) => (
+							<BlogPostCard
+								frontmatter={post.frontmatter}
+								url={post.url}
+							/>
+						))
+				}
+			</ul>
+			<a href="/blog/" class="btn"
+				>View all blog posts <span class="icon">&#8658;</span></a
+			>
+		</div>
+	</section>
+</MainLayout>
+
+<style>
+	.home {
+		display: grid;
+		text-align: center;
+		gap: var(--clamp-2-base);
+	}
+
+	.icon {
+		font-size: var(--clamp-2-base);
+		line-height: normal;
+		margin-right: var(--clamp-x-small);
+	}
+</style>

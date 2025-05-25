@@ -1,0 +1,97 @@
+---
+import MainLayout from "./MainLayout.astro";
+import CategoryTags from "../components/Categorytags.astro";
+import { Image } from "astro:assets";
+import "../styles/blog.css";
+const { frontmatter } = Astro.props;
+---
+
+<MainLayout title={frontmatter.title}>
+    <section aria-labelledby="postTitle">
+        <div class="wrapper-contents post__layout">
+            <div class="post__back-btn">
+                <a href="/blog/" class="btn"
+                    ><span class="icon">&#8656;</span>Back to blog
+                </a>
+            </div>
+            <div class="tags">
+                {
+                    frontmatter.tags.map((tag: string) => (
+                        <a href={`/tags/${tag}`} class="btn tag text-small">
+                            {tag}
+                        </a>
+                    ))
+                }
+            </div>
+            <h1 id="postTitle">{frontmatter.title}</h1>
+            <div class="post__detail">
+                <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
+                <p>Written by : {frontmatter.author}</p>
+            </div>
+            <Image
+                src={frontmatter.image.src}
+                width="500"
+                height="320"
+                alt={frontmatter.image.alt}
+            />
+        </div>
+    </section>
+    <article>
+        <div class="wrapper-contents post__wrapper">
+            <article class="post__article">
+                <slot />
+            </article>
+            <aside class="posts__category">
+                <h3 class="h5">Others Category</h3>
+                <CategoryTags />
+            </aside>
+        </div>
+    </article>
+</MainLayout>
+<style>
+    .post__layout {
+        display: grid;
+        place-items: center;
+        gap: var(--clamp-base);
+        padding-top: var(--clamp-base);
+    }
+
+    .post__back-btn {
+        justify-self: start;
+        margin-bottom: min(12%, var(--size-4-base));
+    }
+
+    .post__back-btn .icon {
+        font-size: var(--clamp-2-base);
+        line-height: normal;
+        margin-right: var(--clamp-x-small);
+    }
+
+    .post__detail {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: var(--clamp-3-base);
+        margin-bottom: min(12%, var(--size-4-base));
+    }
+
+    .post__wrapper {
+        display: flex;
+        gap: var(--clamp-5-base);
+        padding-top: 0;
+    }
+
+    .post__article {
+        flex: 3;
+        display: grid;
+        gap: var(--clamp-base);
+    }
+
+    /* 768px */
+    @media (max-width: 48em) {
+        .post__wrapper {
+            flex-direction: column;
+        }
+    }
+</style>

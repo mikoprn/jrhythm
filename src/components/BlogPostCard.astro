@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets";
+const { frontmatter, url } = Astro.props;
+const { title, pubDate, author, image, description, tags } = frontmatter;
+---
+
+<li class="post__card">
+    <a href={`/tags/${tags}`} class="btn tag">{tags}</a>
+    <a href={url}>
+        <Image src={image.src} alt={image.alt} width="400" height="250" />
+    </a>
+    <a href={url} class="h6">
+        {title}
+    </a>
+    <div class="post__detail">
+        <small>{pubDate.toString().slice(0, 10)}</small>
+        <a href={url} class="post__author text-small">{author}</a>
+    </div>
+    <p class="post__description">{description}</p>
+    <a href={url} class="btn btn-primary post__btn"> Read post</a>
+</li>

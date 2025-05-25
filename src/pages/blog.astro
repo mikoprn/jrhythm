@@ -1,0 +1,51 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import BlogPostCard from "../components/BlogPostCard.astro";
+import CategoryTags from "../components/Categorytags.astro";
+import "../styles/blog.css";
+
+const allPosts = Object.values(
+    import.meta.glob("./posts/*.md", { eager: true }),
+);
+
+allPosts.sort(
+    (a, b) =>
+        new Date(b.frontmatter.pubDate).valueOf() -
+        new Date(a.frontmatter.pubDate).valueOf(),
+);
+---
+
+<MainLayout title="Blog Rhythm Nation">
+    <section aria-labelledby="titleBlog">
+        <div class="wrapper-contents blog">
+            <h1 id="titleBlog">Rhythm Nation Blog</h1>
+            <p class="h4 blog__sub-title">
+                Join the Community and learn from Music Producers and
+                Enthusiasts
+            </p>
+        </div>
+    </section>
+    <section aria-labelledby="postsLatest">
+        <div class="wrapper-contents posts__resent">
+            <h2 id="postsLatest">Latest Blog Posts</h2>
+            <div class="posts__wrapper">
+                <article class="posts__content">
+                    <ul class="posts__list">
+                        {
+                            allPosts.map((post: any) => (
+                                <BlogPostCard
+                                    frontmatter={post.frontmatter}
+                                    url={post.url}
+                                />
+                            ))
+                        }
+                    </ul>
+                </article>
+                <aside class="posts__category">
+                    <h3 class="h4">Categories Post</h3>
+                    <CategoryTags />
+                </aside>
+            </div>
+        </div>
+    </section>
+</MainLayout>
