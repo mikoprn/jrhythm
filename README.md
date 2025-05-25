@@ -1,3 +1,7 @@
+# Simple Blog Website With Astro JS without Using Content Collection.
+
+![jryhtym](https://github.com/user-attachments/assets/f5d0457f-98a5-4fbd-a553-d89c5ce817ee)
+
 # Astro Starter Kit: Basics
 
 ```sh
